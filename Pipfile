@@ -1,0 +1,6 @@
+[requires]
+python_version = "3.8.2"
+
+[packages]
+bcrypt = "*"
+django = {extras = ["argon2"],version = "*"}
