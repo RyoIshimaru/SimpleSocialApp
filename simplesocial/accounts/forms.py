@@ -8,6 +8,6 @@ class UserCreateForm(UserCreationForm):
         model = get_user_model()
 
     def __init__(self, *args, **kargs):
-        super().__init__(*args, **kargs):
+        super().__init__(*args, **kargs)
         self.fields['username'].label = 'Display Name'
         self.fields['email'].label = 'Email Address'
