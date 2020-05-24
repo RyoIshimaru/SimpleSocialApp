@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils.text import slugify
 
+from django.urls import reverse
+
 # Create your models here.
 import misaka
 
@@ -34,11 +36,13 @@ class Group(models.Model):
         ordering = ['name']
 
 class GroupMember(models.Model):
-    groups = models.ForeignKey(Group, related_name='memberships')
-    user = models.ForeignKey(User, related_name='user_groups')
+    groups = models.ForeignKey(Group, related_name='memberships',
+                               on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name='user_groups',
+                             on_delete=models.CASCADE)
 
     def __str__(self):
         return self.user.username
 
     class Meta:
-        unique_together = ('group', 'user')
+        unique_together = ('groups', 'user')

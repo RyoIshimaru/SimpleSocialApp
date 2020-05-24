@@ -9,7 +9,7 @@ from django.shortcuts import get_object_or_404
 
 from groups.models import Group
 
-class CreateGroup(LoginRequiredMixin, generic.CreteView):
+class CreateGroup(LoginRequiredMixin, generic.CreateView):
     fields = ('name', 'description')
     model = Group
 
@@ -29,7 +29,7 @@ class JoinGroup(LoginRequiredMixin, generic.RedirectView):
 
         try:
             GroupMember.objects.create(user=self.request.user, group=group)
-        except IntegrityError:
+        except:
             messages.warning(self.request, ('Warning already a member!'))
         else:
             messages.success(self.request, "You are now a member!")
